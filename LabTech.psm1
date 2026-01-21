@@ -344,6 +344,7 @@ Function Stop-LTService{
     }#End Begin
 
     Process{
+        <#
         if (-not (Get-Service 'LTService','LTSvcMon' -ErrorAction SilentlyContinue)) {
             If ($WhatIfPreference -ne $True) {
                 Write-Error "ERROR: Line $(LINENUM): Services NOT Found $($Error[0])"
@@ -353,6 +354,7 @@ Function Stop-LTService{
                 return
             }#End If
         }#End If
+        #>
         If ($PSCmdlet.ShouldProcess("LTService, LTSvcMon", "Stop-Service")) {
             $Null=Invoke-LTServiceCommand ('Kill VNC','Kill Trays') -EA 0 -WhatIf:$False -Confirm:$False
             Write-Verbose "Stopping Labtech Services"
